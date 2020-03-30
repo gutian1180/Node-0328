@@ -12,8 +12,18 @@ let add = async (obj)=>{
   }else{
     return result;
   }
-}  
+}
+// 房产名称删除接口
+let deleteArea = async (_id)=>{
+  let result = await areaModel.findByIdAndDelete(_id);
+  if (!result) {
+    throw (404,'删除失败')
+  }else{
+    return result;
+  }
+}   
 module.exports={
   add,
-  find
+  find,
+  deleteArea
 }

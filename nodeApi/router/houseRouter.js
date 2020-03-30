@@ -1,6 +1,6 @@
 const  express = require('express');
 const router = express.Router();
-const {findHouse,addHouse,deleteHouse} = require("../control/houseControl");
+const {findHouse,addHouse,deleteHouse,update} = require("../control/houseControl");
 
   router.get('/findall',(req,res)=>{
     let {page,pageSize}=req.query
@@ -26,6 +26,13 @@ const {findHouse,addHouse,deleteHouse} = require("../control/houseControl");
     .then(()=>{res.send({code:0,msg:'删除成功'})})
     .catch((err)=>{res.send({code:-2,msg:'删除失败请重试',err})})
   })
-
+  // 房产修改接口,这里采用put方法，传参同时利用query和body
+router.put('/update',(req,res)=>{
+  let {_id}=req.query
+  let {areaName,kind,unit,sold,stock,picturePath,area,price,address} = req.body;//筛选信息；
+ update(_id,{areaName,kind,unit,sold,stock,picturePath,area,price,address})
+  .then(()=>{res.send({code:0,msg:'房源信息修改成功'})})
+  .catch((err)=>{res.send({code:-2,msg:'房源信息修改失败，请重试',err})})
+})
 
   module.exports = router

@@ -1,7 +1,7 @@
 const  express = require('express');
 
 const router = express.Router();
-const {find,add} = require("../control/areaControl");
+const {find,add,deleteArea} = require("../control/areaControl");
 
   router.get('/find',(req,res)=>{
     find()
@@ -12,11 +12,18 @@ const {find,add} = require("../control/areaControl");
     })
     .catch((err)=>{ res.send({code:-1,msg:'查询失败'})})
   });
-// 添加管理员,非上线API
+// 添加房产,非上线API
   router.post('/add',(req,res)=>{
     let {areaName} = req.body;//筛选信息；
       add({areaName})
       .then(()=>{res.send({code:0,msg:'插入成功'})})
       .catch((err)=>{res.send({code:-2,msg:'插入失败请重试',err})})
   });
+      // 房产名字删除接口
+      router.delete('/delete',(req,res)=>{
+        let {_id}=req.query
+        deleteArea({_id})
+        .then(()=>{res.send({code:0,msg:'删除楼盘名称成功'})})
+        .catch((err)=>{res.send({code:-2,msg:'删除楼盘名称，失败请重试',err})})
+      })
   module.exports = router
