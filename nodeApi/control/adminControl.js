@@ -28,11 +28,21 @@ let addAdmin = async (userName,passWord)=>{
   }
   return result;
 }
+//  判断token 和用户是否统一 
+let tokenCheck = async (_id,token)=>{
+  let result = await userModel.findOne({_id,token})
+  if(result){
+    return result 
+  }else{
+    throw '用户token不匹配'
+  }
+}
 
 
 module.exports={
   adminLogin,
-  addAdmin
+  addAdmin,
+  tokenCheck
   
   
 }
