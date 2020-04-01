@@ -1,5 +1,5 @@
 const userModel = require("../db/model/userModel");
-// const {createToken} = require('../utils/jwt');
+const {createToken} = require('../utils/jwt');
 //userLogin,userReg
 //
 
@@ -7,12 +7,11 @@ const userModel = require("../db/model/userModel");
 let adminLogin = async(userName,passWord)=>{
   let result = await userModel.findOne({userName,passWord});
   if(!!result){
-    let {leavel,userName} = result;
-    // let token =createToken({_id,userName});
-    // let updateResult  = await userModel.updateOne({_id},{token})
-    // console.log(updateResult);
-    // return {_id,userName,token};
-    return {leavel,userName};
+    let {leavel,userName,_id} = result;
+    let token =createToken({leavel,userName,_id});
+    let updateResult  = await userModel.updateOne({_id},{token})//把生成的token写入服务器数据库
+    if(!updateResult){throw (500,'数据库写入token失败')}
+    return {leavel,userName,token};//返回给前端写入本地储存
   }else{
     throw (404,'用户名或密码不存在')
   }

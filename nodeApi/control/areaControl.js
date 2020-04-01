@@ -1,8 +1,8 @@
 const areaModel = require("../db/model/areaModel");
 // 房屋分页查询
 let find = async()=>{
-  let list = await areaModel.find();
-  return {list};
+  let alist = await areaModel.find();
+  return {alist};
 }
 // 房屋添加接口
 let add = async (obj)=>{

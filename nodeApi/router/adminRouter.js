@@ -2,8 +2,7 @@ const  express = require('express');
 
 const router = express.Router();
 const {adminLogin,addAdmin} = require("../control/adminControl");
-
-// const tokenMiddlWare = require('../middleware/tokenMiddleWare')
+// const tokenMiddlWare = require('../middleware/tokenMiddleWare')//这里要做登录成功抛出token的操作
 //引入登录的数据库操作函数；
 //记住路由两个引用：1，数据模型；2，数据库操作函数；
 //登录部分

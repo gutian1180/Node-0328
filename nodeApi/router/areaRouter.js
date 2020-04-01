@@ -7,8 +7,8 @@ const {find,add,deleteArea} = require("../control/areaControl");
     find()
     .then((info)=>{ 
       //lisi为全部房屋数据,allCount为总数量
-      let {list} = info;
-      res.send({code:0,msg:'查询成功',list})
+      let {alist} = info;
+      res.send({code:0,msg:'查询成功',alist})
     })
     .catch((err)=>{ res.send({code:-1,msg:'查询失败'})})
   });
