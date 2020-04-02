@@ -7,11 +7,12 @@ const {createToken} = require('../utils/jwt');
 let adminLogin = async(userName,passWord)=>{
   let result = await userModel.findOne({userName,passWord});
   if(!!result){
+    //把三个数据写入token
     let {leavel,userName,_id} = result;
-    console.log(leavel);
     
     let token =createToken({leavel,userName,_id});
     let updateResult  = await userModel.updateOne({_id},{token})//把生成的token写入服务器数据库
+    
     if(!updateResult){throw (500,'数据库写入token失败')}
     return {leavel,userName,token};//返回给前端写入本地储存
   }else{
