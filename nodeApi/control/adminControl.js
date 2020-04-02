@@ -8,6 +8,8 @@ let adminLogin = async(userName,passWord)=>{
   let result = await userModel.findOne({userName,passWord});
   if(!!result){
     let {leavel,userName,_id} = result;
+    console.log(leavel);
+    
     let token =createToken({leavel,userName,_id});
     let updateResult  = await userModel.updateOne({_id},{token})//把生成的token写入服务器数据库
     if(!updateResult){throw (500,'数据库写入token失败')}
@@ -17,14 +19,14 @@ let adminLogin = async(userName,passWord)=>{
   }
 }
 // 添加接口
-let addAdmin = async (userName,passWord)=>{
+let addAdmin = async (userName,passWord,leavel)=>{
   let isExst = await userModel.findOne({userName});
   // 如果查询到数据 返回查到的数据 没有返回假 
   let result
   if (!!isExst) {
     throw (404,'用户存在')
   }else{
-     result = await userModel.insertMany({userName,passWord});
+     result = await userModel.insertMany({userName,passWord,leavel});
   }
   return result;
 }

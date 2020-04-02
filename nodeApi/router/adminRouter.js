@@ -15,9 +15,9 @@ const {adminLogin,addAdmin} = require("../control/adminControl");
   });
 // 添加管理员,非上线API
   router.post('/add',(req,res)=>{
-    let {userName,passWord} = req.body;//筛选信息；
+    let {userName,passWord,leavel} = req.body;//筛选信息；
       // 验证码判断； //启动函数
-      addAdmin(userName,passWord)
+      addAdmin(userName,passWord,leavel)
       .then(()=>{res.send({code:0,msg:'注册ok'})})
       .catch((err)=>{res.send({code:-2,msg:err})})
   });

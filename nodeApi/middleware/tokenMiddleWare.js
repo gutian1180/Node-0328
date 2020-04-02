@@ -13,7 +13,7 @@ let tokenMiddlWare = (req,res,next)=>{
     let tokenState = verifyToken(token);
     // console.log(tokenState) ;//token是由ID和mail加密后产生的，所以解密后里面肯定含有id
     console.log(tokenState);
-    
+    req.userInfo = tokenState
     if(tokenState){
        //判断一下数据库token 和用户传递的token 是否一致
        tokenCheck(tokenState._id,token)
