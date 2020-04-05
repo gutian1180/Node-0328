@@ -6,7 +6,7 @@ const {find,add,deleteKind} = require("../control/kindControl");
   router.get('/find',(req,res)=>{
     find()
     .then((info)=>{ 
-      //lisi为全部房屋数据,allCount为总数量
+      // console.log(info);
       let {list} = info;
       res.send({code:0,msg:'查询成功',list})
     })

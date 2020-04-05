@@ -4,7 +4,7 @@ let createToken = (data,expiresIn)=>{
     let  obj ={} ;
     obj.data = data || {};//加空对象防止报错
     obj.ctime = (new Date()).getTime();//获取当前时间
-    obj.expiresIn = expiresIn || 1000*60*10;//计算过期时间
+    obj.expiresIn = expiresIn || 1000*60*60;//计算过期时间
     // 1000*60*60*24*7
     let token = JWT.sign(obj,secret);//创建token
     return token;
