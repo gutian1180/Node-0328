@@ -21,7 +21,7 @@ app.use("/admin",userRouter);//登录接口
 app.use("/house",tokenMiddleWare,authPermissions,houseRouter);//房产信息接口,
 app.use("/housekind",tokenMiddleWare,authPermissions,kindRouter);//楼盘名字接口
 app.use("/houseArea",tokenMiddleWare,authPermissions,areaRouter);//房产类型接口
-app.use("/houseupload",tokenMiddleWare,authPermissions,uploadRouter);//文件上传接口
+app.use("/houseupload",uploadRouter);//文件上传接口
 
 app.listen(2000,()=>{console.log(
     `服务器启动成功`);

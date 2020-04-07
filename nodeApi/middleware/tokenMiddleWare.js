@@ -8,11 +8,11 @@ let tokenMiddlWare = (req,res,next)=>{
      
     if(token==='no token'){
       // throw(404,'token丢却')
-      return res.send({err:-997,msg:'token丢失,请重新登录'})} 
+      return res.send({err:-997,code:402, msg:'token丢失,请重新登录'})} 
     //获取验证token的状态
     let tokenState = verifyToken(token);
     // console.log(tokenState) ;//token是由ID和mail加密后产生的，所以解密后里面肯定含有id
-    console.log(tokenState);
+    // console.log(tokenState);
     req.userInfo = tokenState
     if(tokenState){
        //判断一下数据库token 和用户传递的token 是否一致
